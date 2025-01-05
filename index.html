@@ -3,18 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto Download Payload</title>
+  <title>Download Payload</title>
 </head>
 <body>
-  <h1>Your download will start automatically.</h1>
+  <h1>Click the link below to download the payload.</h1>
 
-  <script>
-    window.onload = function() {
-      var link = document.createElement('a');
-      link.href = '/payload.ps1';  // The path to your payload
-      link.download = 'payload.ps1';     // This will suggest the filename when downloading
-      link.click();                      // Trigger the download
-    };
-  </script>
+  <!-- Link to download the payload -->
+  <a href="/payload.ps1" download="payload.ps1">Download Payload</a>
 </body>
 </html>
