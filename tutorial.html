@@ -1,1 +1,413 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEBunbound | Installation Tutorial</title>
+  <style>
+    :root {
+      --background: #0a0e17;
+      --text: #e2e8f0;
+      --accent: #00ff9d;
+      --secondary: #1e293b;
+      --highlight: #0ea5e9;
+      --danger: #ff0056;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+    
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid #2d3748;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    
+    .nav-link.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+    
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 0;
+    }
+    
+    .tutorial-container {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    .tutorial-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .tutorial-title {
+      font-size: 36px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .tutorial-subtitle {
+      font-size: 18px;
+      color: #a0aec0;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .tutorial-step {
+      background-color: var(--secondary);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .step-number {
+      display: inline-block;
+      background-color: var(--accent);
+      color: var(--background);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .step-title {
+      display: inline-block;
+      font-size: 22px;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    
+    .step-content {
+      margin-top: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    
+    .code-block {
+      background-color: #1a1e2e;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      position: relative;
+    }
+    
+    .code-block code {
+      color: #e2e8f0;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #2d3748;
+      color: var(--text);
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .copy-btn:hover {
+      background-color: #4a5568;
+    }
+    
+    .alert {
+      background-color: rgba(255, 0, 86, 0.1);
+      border-left: 4px solid var(--danger);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+    
+    .alert-title {
+      color: var(--danger);
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .alert-title::before {
+      content: '⚠️';
+      margin-right: 10px;
+    }
+    
+    .tip {
+      background-color: rgba(0, 255, 157, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+    
+    .tip-title {
+      color: var(--accent);
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tip-title::before {
+      content: '💡';
+      margin-right: 10px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--accent);
+      color: var(--background);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 255, 157, 0.4);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--accent);
+      color: var(--background);
+    }
+    
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+    }
+    
+    .terminal-view {
+      background-color: #1a1e2e;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      line-height: 1.5;
+      margin: 15px 0;
+    }
+    
+    .terminal-line {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    
+    .terminal-prompt {
+      color: var(--accent);
+      margin-right: 10px;
+    }
+    
+    .step-image {
+      width: 100%;
+      border-radius: 6px;
+      margin: 15px 0;
+      border: 1px solid #2d3748;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #4a5568;
+      font-size: 14px;
+      border-top: 1px solid #2d3748;
+    }
+    
+    .status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+    }
+    
+    @media screen and (max-width: 768px) {
+      .tutorial-title {
+        font-size: 28px;
+      }
+      
+      .tutorial-subtitle {
+        font-size: 16px;
+      }
+      
+      .step-title {
+        font-size: 20px;
+      }
+      
+      .nav-links {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="matrix-bg" id="matrix"></canvas>
+  
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">SEBunbound</div>
+        <div class="nav-links">
+          <a href="https://rayzen.website" class="nav-link">Home</a>
+          <a href="https://rayzen.website/tutorial" class="nav-link active">Tutorial</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="container">
+    <div class="tutorial-container">
+      <div class="tutorial-header">
+        <h1 class="tutorial-title">Installation Tutorial</h1>
+        <p class="tutorial-subtitle">Follow these steps to properly install and configure SEBunbound for an optimal SEB bypass experience.</p>
+      </div>
+      
+      <div class="tutorial-step">
+        <span class="step-number">1</span>
+        <h2 class="step-title">Download SEBunbound</h2>
+        <div class="step-content">
+          <p>First, download the latest version of SEBunbound from our official website. Make sure you're downloading from a trusted source (this website) to avoid security risks.</p>
+          <div class="terminal-view">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span>Downloading SEBunbound_v1.2.3.exe...</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span>Verifying digital signature...</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span>Download complete. Signature verified.</span>
+            </div>
+          </div>
+          <a href="https://rayzen.website" class="btn">Download SEBunbound</a>
+        </div>
+      </div>
+      
+      <div class="tutorial-step">
+        <span class="step-number">2</span>
+        <h2 class="step-title">Pre-Installation Setup</h2>
+        <div class="step-content">
+          <p>Before running the installation, you need to temporarily disable your antivirus software as it may interfere with the installation process. The program needs to modify certain system files to establish the bypass functionality.</p>
+          
+          <div class="alert">
+            <div class="alert-title">Important Security Note</div>
+            <p>Your antivirus may flag SEBunbound as suspicious due to its system-level modifications. This is a false positive. Our software is clean and safe to use but requires deep system access to function properly.</p>
+          </div>
+          
+          <p>Once your antivirus is disabled, run the installer with administrator privileges:</p>
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+            <code id="code1">Right-click on SEBunbound_v1.2.3.exe → Run as administrator</code>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tutorial-step">
+        <span class="step-number">3</span>
+        <h2 class="step-title">Installation Process</h2>
+        <div class="step-content">
+          <p>The installation wizard will guide you through the setup process. Follow these steps:</p>
+          <ol style="margin-left: 20px; line-height: 1.6;">
+            <li>Accept the license agreement</li>
+            <li>Choose installation directory (preferably on a drive with at least 2GB free space)</li>
+            <li>Select components to install:</li>
+          </ol>
+          <div class="code-block">
+            <code>
+✓ Core Bypass
