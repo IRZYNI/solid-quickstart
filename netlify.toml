@@ -4,8 +4,13 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/tutorial"
+  to = "/tutorial.html"
+  status = 200
+
+# For any other path that doesn't exist, serve the index.html
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-  ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
+  force = false
