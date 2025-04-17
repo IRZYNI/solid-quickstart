@@ -49,6 +49,33 @@
       letter-spacing: 2px;
     }
     
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    
+    .nav-link.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+    
     main {
       flex: 1;
       display: flex;
@@ -233,6 +260,24 @@
       color: #a0aec0;
     }
     
+    .tutorial-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--highlight);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+    
+    .tutorial-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    
+    .tutorial-link::after {
+      content: ' →';
+    }
+    
     .matrix-bg {
       position: fixed;
       top: 0;
@@ -285,6 +330,10 @@
         padding: 12px 30px;
         font-size: 16px;
       }
+      
+      .nav-links {
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -293,13 +342,19 @@
   
   <header>
     <div class="container">
-      <div class="logo">SEBunbound</div>
+      <nav>
+        <div class="logo">SEBunbound</div>
+        <div class="nav-links">
+          <a href="https://rayzen.website" class="nav-link active">Home</a>
+          <a href="https://rayzen.website/tutorial" class="nav-link">Tutorial</a>
+        </div>
+      </nav>
     </div>
   </header>
   
   <main class="container">
-    <h1 class="hero-title">SEBunbound Advanced Security Tool</h1>
-    <p class="hero-subtitle">A cutting-edge security solution that provides advanced network protection and system optimization in one powerful package.</p>
+    <h1 class="hero-title">SEBunbound Helping students in need</h1>
+    <p class="hero-subtitle">A stealth-grade bypass toolkit engineered for one purpose: overriding Safe Exam Browser. Access your tools. Use AI. Control your exam.</p>
     
     <div class="terminal">
       <div class="terminal-header">
@@ -329,7 +384,7 @@
         </div>
         <div class="terminal-line">
           <span class="terminal-prompt">$</span>
-          <span class="terminal-text">SEBunbound_v1.2.3.exe ready for download</span>
+          <span class="terminal-text">loading modules: [AI Assist, Custom Notes, Stealth HUD]</span>
         </div>
         <div class="terminal-line">
           <span class="terminal-prompt">$</span>
@@ -344,23 +399,24 @@
     
     <div class="features">
       <div class="feature-card">
-        <h3 class="feature-title">Advanced Security</h3>
-        <p class="feature-desc">Enterprise-grade protection with real-time threat detection and neutralization capabilities.</p>
+        <h3 class="feature-title">Silent Override</h3>
+        <p class="feature-desc">Bypasses Safe Exam Browser defenses in real time. No alerts. No logs. Full control returned to the user.</p>
       </div>
       <div class="feature-card">
-        <h3 class="feature-title">System Optimization</h3>
-        <p class="feature-desc">Automatic performance tuning and resource management for maximum efficiency.</p>
+        <h3 class="feature-title">Ghost Mode</h3>
+        <p class="feature-desc">Runs silently in the background. Lightweight. Invisible. Emulates legitimate exam behavior while unlocking hidden tools.</p>
+        <a href="https://rayzen.website/tutorial" class="tutorial-link">View Installation Tutorial</a>
       </div>
       <div class="feature-card">
-        <h3 class="feature-title">Secure Network</h3>
-        <p class="feature-desc">Encrypted communications and advanced firewall protection against intrusion attempts.</p>
+        <h3 class="feature-title">AI Injection Suite</h3>
+        <p class="feature-desc">Injects pre-trained AI helpers, personal notes, or GPT overlays into live exam sessions. No detection. No trace.</p>
       </div>
     </div>
   </main>
   
   <footer>
     <div class="container">
-      <span class="status"></span> SEBunbound v1.2.3 | Secure System Solutions © 2025
+      <span class="status"></span> SEBcrack // vX | Educational Infiltration Protocol © 2025 – not affiliated with any institution
     </div>
   </footer>
   
