@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEBunbound | Installation Tutorial</title>
+  <title>SEBunbound | Tutorial</title>
+  <!-- Same styles as in your index.html -->
   <style>
     :root {
       --background: #0a0e17;
@@ -84,174 +85,51 @@
       padding: 50px 0;
     }
     
-    .tutorial-container {
+    .tutorial-section {
       width: 100%;
       max-width: 800px;
+      margin-bottom: 30px;
     }
     
-    .tutorial-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    .tutorial-title {
-      font-size: 36px;
+    .section-title {
+      font-size: 28px;
       color: var(--accent);
       margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 10px;
     }
     
-    .tutorial-subtitle {
-      font-size: 18px;
-      color: #a0aec0;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    
-    .tutorial-step {
+    .section-content {
       background-color: var(--secondary);
       border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 30px;
+      padding: 20px;
+      margin-bottom: 20px;
       border-left: 4px solid var(--accent);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
-    .step-number {
-      display: inline-block;
-      background-color: var(--accent);
-      color: var(--background);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 32px;
-      font-weight: bold;
-      margin-right: 10px;
+    .step {
+      margin-bottom: 25px;
     }
     
     .step-title {
-      display: inline-block;
-      font-size: 22px;
-      color: var(--accent);
-      margin-bottom: 15px;
+      font-size: 20px;
+      color: var(--highlight);
+      margin-bottom: 10px;
     }
     
-    .step-content {
-      margin-top: 15px;
+    .step-description {
+      line-height: 1.6;
       color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
+      margin-bottom: 15px;
     }
     
     .code-block {
       background-color: #1a1e2e;
-      border-radius: 6px;
       padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
       margin: 15px 0;
       font-family: 'Courier New', monospace;
-      overflow-x: auto;
-      position: relative;
-    }
-    
-    .code-block code {
-      color: #e2e8f0;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-    
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #2d3748;
-      color: var(--text);
-      border: none;
-      border-radius: 4px;
-      padding: 5px 10px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .copy-btn:hover {
-      background-color: #4a5568;
-    }
-    
-    .alert {
-      background-color: rgba(255, 0, 86, 0.1);
-      border-left: 4px solid var(--danger);
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 6px;
-    }
-    
-    .alert-title {
-      color: var(--danger);
-      font-weight: bold;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .alert-title::before {
-      content: '⚠️';
-      margin-right: 10px;
-    }
-    
-    .tip {
-      background-color: rgba(0, 255, 157, 0.1);
-      border-left: 4px solid var(--accent);
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 6px;
-    }
-    
-    .tip-title {
-      color: var(--accent);
-      font-weight: bold;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .tip-title::before {
-      content: '💡';
-      margin-right: 10px;
-    }
-    
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: var(--accent);
-      color: var(--background);
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      font-size: 14px;
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 255, 157, 0.4);
-    }
-    
-    .btn-outline {
-      background-color: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-    }
-    
-    .btn-outline:hover {
-      background-color: var(--accent);
-      color: var(--background);
     }
     
     .matrix-bg {
@@ -262,32 +140,6 @@
       height: 100%;
       z-index: -1;
       opacity: 0.05;
-    }
-    
-    .terminal-view {
-      background-color: #1a1e2e;
-      padding: 15px;
-      border-radius: 6px;
-      font-family: 'Courier New', monospace;
-      line-height: 1.5;
-      margin: 15px 0;
-    }
-    
-    .terminal-line {
-      display: flex;
-      margin-bottom: 10px;
-    }
-    
-    .terminal-prompt {
-      color: var(--accent);
-      margin-right: 10px;
-    }
-    
-    .step-image {
-      width: 100%;
-      border-radius: 6px;
-      margin: 15px 0;
-      border: 1px solid #2d3748;
     }
     
     footer {
@@ -314,24 +166,6 @@
       70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
     }
-    
-    @media screen and (max-width: 768px) {
-      .tutorial-title {
-        font-size: 28px;
-      }
-      
-      .tutorial-subtitle {
-        font-size: 16px;
-      }
-      
-      .step-title {
-        font-size: 20px;
-      }
-      
-      .nav-links {
-        gap: 15px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -342,72 +176,126 @@
       <nav>
         <div class="logo">SEBunbound</div>
         <div class="nav-links">
-          <a href="https://rayzen.website" class="nav-link">Home</a>
-          <a href="https://rayzen.website/tutorial" class="nav-link active">Tutorial</a>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="tutorial.html" class="nav-link active">Tutorial</a>
         </div>
       </nav>
     </div>
   </header>
   
   <main class="container">
-    <div class="tutorial-container">
-      <div class="tutorial-header">
-        <h1 class="tutorial-title">Installation Tutorial</h1>
-        <p class="tutorial-subtitle">Follow these steps to properly install and configure SEBunbound for an optimal SEB bypass experience.</p>
-      </div>
-      
-      <div class="tutorial-step">
-        <span class="step-number">1</span>
-        <h2 class="step-title">Download SEBunbound</h2>
-        <div class="step-content">
-          <p>First, download the latest version of SEBunbound from our official website. Make sure you're downloading from a trusted source (this website) to avoid security risks.</p>
-          <div class="terminal-view">
-            <div class="terminal-line">
-              <span class="terminal-prompt">$</span>
-              <span>Downloading SEBunbound_v1.2.3.exe...</span>
-            </div>
-            <div class="terminal-line">
-              <span class="terminal-prompt">$</span>
-              <span>Verifying digital signature...</span>
-            </div>
-            <div class="terminal-line">
-              <span class="terminal-prompt">$</span>
-              <span>Download complete. Signature verified.</span>
-            </div>
-          </div>
-          <a href="https://rayzen.website" class="btn">Download SEBunbound</a>
+    <h1 class="section-title">SEBunbound Installation Tutorial</h1>
+    
+    <div class="tutorial-section">
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Step 1: Download SEBunbound</h3>
+          <p class="step-description">Download the latest version of SEBunbound from our homepage. Make sure to save the file in a secure location on your computer.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Step 2: Preparation</h3>
+          <p class="step-description">Before running the tool, disable any antivirus software temporarily as it might interfere with the installation process. This is a security tool and may be flagged.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Step 3: Installation</h3>
+          <p class="step-description">Run the downloaded file as administrator. When prompted, select your installation preferences. The tool will automatically configure itself for optimal stealth operation.</p>
         </div>
       </div>
-      
-      <div class="tutorial-step">
-        <span class="step-number">2</span>
-        <h2 class="step-title">Pre-Installation Setup</h2>
-        <div class="step-content">
-          <p>Before running the installation, you need to temporarily disable your antivirus software as it may interfere with the installation process. The program needs to modify certain system files to establish the bypass functionality.</p>
-          
-          <div class="alert">
-            <div class="alert-title">Important Security Note</div>
-            <p>Your antivirus may flag SEBunbound as suspicious due to its system-level modifications. This is a false positive. Our software is clean and safe to use but requires deep system access to function properly.</p>
-          </div>
-          
-          <p>Once your antivirus is disabled, run the installer with administrator privileges:</p>
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
-            <code id="code1">Right-click on SEBunbound_v1.2.3.exe → Run as administrator</code>
-          </div>
+    </div>
+    
+    <div class="tutorial-section">
+      <h2 class="section-title">Usage Guide</h2>
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Activating Ghost Mode</h3>
+          <p class="step-description">Once installed, press the key combination <strong>Ctrl+Alt+G</strong> to activate Ghost Mode. This will silently disable SEB restrictions while maintaining the appearance of a locked-down session.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Using AI Assistance</h3>
+          <p class="step-description">With Ghost Mode active, press <strong>Ctrl+Alt+A</strong> to open the AI assistance panel. You can type questions directly or use the voice input feature for hands-free operation.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Emergency Exit</h3>
+          <p class="step-description">If you need to quickly return to SEB-compliant mode, press <strong>Ctrl+Alt+X</strong>. This will immediately restore all SEB restrictions and clear any traces of SEBunbound activity.</p>
         </div>
       </div>
+    </div>
+    
+    <div class="tutorial-section">
+      <h2 class="section-title">Troubleshooting</h2>
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Installation Errors</h3>
+          <p class="step-description">If you encounter installation errors, try running the installer in compatibility mode for Windows 10/11 or contact our support team.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Detection Concerns</h3>
+          <p class="step-description">SEBunbound is designed to be undetectable, but always ensure you're using the latest version to benefit from our most advanced stealth technologies.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <span class="status"></span> SEBcrack // vX | Educational Infiltration Protocol © 2025 – not affiliated with any institution
+    </div>
+  </footer>
+  
+  <script>
+    // Matrix background effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas dimensions
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // Characters for the matrix
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'.split('');
+    
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    
+    // Array to track y position of each column
+    const drops = Array(columns).fill(1);
+    
+    function drawMatrix() {
+      // Translucent black to create fade effect
+      ctx.fillStyle = 'rgba(10, 14, 23, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      <div class="tutorial-step">
-        <span class="step-number">3</span>
-        <h2 class="step-title">Installation Process</h2>
-        <div class="step-content">
-          <p>The installation wizard will guide you through the setup process. Follow these steps:</p>
-          <ol style="margin-left: 20px; line-height: 1.6;">
-            <li>Accept the license agreement</li>
-            <li>Choose installation directory (preferably on a drive with at least 2GB free space)</li>
-            <li>Select components to install:</li>
-          </ol>
-          <div class="code-block">
-            <code>
-✓ Core Bypass
+      ctx.fillStyle = '#00FF9D';
+      ctx.font = `${fontSize}px monospace`;
+      
+      for (let i = 0; i < drops.length; i++) {
+        // Random character
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Draw the character
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        
+        // Move to next position or reset
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+    }
+    
+    setInterval(drawMatrix, 50);
+    
+    // Resize canvas when window is resized
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
