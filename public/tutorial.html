@@ -162,6 +162,21 @@
       animation: pulse 2s infinite;
     }
     
+    .warning-box {
+      background-color: rgba(255, 0, 86, 0.2);
+      border-left: 4px solid var(--danger);
+      padding: 15px;
+      margin-bottom: 25px;
+      border-radius: 4px;
+    }
+    
+    .warning-title {
+      color: var(--danger);
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
     @keyframes pulse {
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
       70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
@@ -188,40 +203,141 @@
     <h1 class="section-title">SEBunbound Installation Tutorial</h1>
     
     <div class="tutorial-section">
+      <div class="warning-box">
+        <h3 class="warning-title">⚠️ IMPORTANT WARNING</h3>
+        <p>This software is designed to bypass SEB security measures. As such, it may be flagged as malicious by antivirus software. This is a false positive. You may need to temporarily disable your antivirus during installation. Use this software at your own risk and only for educational purposes.</p>
+      </div>
+      
       <div class="section-content">
         <div class="step">
-          <h3 class="step-title">Step 1: Download SEBunbound</h3>
-          <p class="step-description">Download the latest version of SEBunbound from our homepage. Make sure to save the file in a secure location on your computer.</p>
+          <h3 class="step-title">Step 1: Download Required Software</h3>
+          <p class="step-description">
+            <strong>Important:</strong> You must use SEB version 3.5.0 for this exploit to work. Do NOT download the latest version.
+          </p>
+          <p class="step-description">
+            1. Download SEB 3.5.0 from: <a href="https://sourceforge.net/projects/seb/files/seb/SEB_3.5.0/" style="color: var(--highlight);">https://sourceforge.net/projects/seb/files/seb/SEB_3.5.0/</a><br>
+            2. Download the SEBunbound package from our homepage and save it in a secure location.
+          </p>
         </div>
         
         <div class="step">
           <h3 class="step-title">Step 2: Preparation</h3>
-          <p class="step-description">Before running the tool, disable any antivirus software temporarily as it might interfere with the installation process. This is a security tool and may be flagged.</p>
+          <p class="step-description">
+            <strong>Note:</strong> This exploit will ONLY work if your PC is NOT being charged. Disconnect your PC from power for the exploit to function properly.
+          </p>
+          <p class="step-description">
+            Before proceeding:
+            <br>- Disable any antivirus software temporarily as it may interfere with the installation process
+            <br>- Ensure you have administrator privileges on your computer
+          </p>
         </div>
         
         <div class="step">
           <h3 class="step-title">Step 3: Installation</h3>
-          <p class="step-description">Run the downloaded file as administrator. When prompted, select your installation preferences. The tool will automatically configure itself for optimal stealth operation.</p>
+          <p class="step-description">
+            1. Unzip the downloaded SEBunbound package<br>
+            2. Right-click on <strong>install.bat</strong> and select "Run as administrator"<br>
+            3. Allow the installation to complete - this will set up all necessary components
+          </p>
+          <p class="step-description">
+            <strong>Free Trial:</strong> You will receive a free trial of 5 uses valid for 1 week. After that, you will need to purchase a license to continue using SEBunbound.
+          </p>
         </div>
       </div>
     </div>
     
     <div class="tutorial-section">
-      <h2 class="section-title">Usage Guide</h2>
+      <h2 class="section-title">Installation Options</h2>
       <div class="section-content">
         <div class="step">
-          <h3 class="step-title">Activating Ghost Mode</h3>
-          <p class="step-description">Once installed, press the key combination <strong>Ctrl+Alt+G</strong> to activate Ghost Mode. This will silently disable SEB restrictions while maintaining the appearance of a locked-down session.</p>
+          <h3 class="step-title">Option 1: Simple Batch File Installation</h3>
+          <p class="step-description">
+            This approach is simple and requires minimal setup:
+            <br>1. Extract all files to a temporary folder
+            <br>2. Right-click <strong>install.bat</strong> and select "Run as administrator"
+            <br>3. The installer will:
+            <br>&nbsp;&nbsp;&nbsp;• Check for and install Python if needed
+            <br>&nbsp;&nbsp;&nbsp;• Install required dependencies
+            <br>&nbsp;&nbsp;&nbsp;• Copy program files to the appropriate location
+            <br>&nbsp;&nbsp;&nbsp;• Create desktop and start menu shortcuts
+          </p>
         </div>
         
         <div class="step">
-          <h3 class="step-title">Using AI Assistance</h3>
-          <p class="step-description">With Ghost Mode active, press <strong>Ctrl+Alt+A</strong> to open the AI assistance panel. You can type questions directly or use the voice input feature for hands-free operation.</p>
+          <h3 class="step-title">Option 2: Setup Wizard Installation (Recommended)</h3>
+          <p class="step-description">
+            For a more professional installation experience:
+            <br>1. Extract all files to a temporary folder
+            <br>2. Run <strong>setup.exe</strong>
+            <br>3. Follow the on-screen instructions to:
+            <br>&nbsp;&nbsp;&nbsp;• Choose the installation location
+            <br>&nbsp;&nbsp;&nbsp;• Enter a Gemini API key (optional)
+            <br>&nbsp;&nbsp;&nbsp;• Select components to install
+            <br>&nbsp;&nbsp;&nbsp;• Create shortcuts
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tutorial-section">
+      <h2 class="section-title">Using SEBunbound</h2>
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Option 1: Using Local JSON Answer Keys</h3>
+          <p class="step-description">
+            This option works without an internet connection:
+            <br>1. Create JSON answer key files in the <strong>Answer-Key</strong> folder
+            <br>2. Use this format:
+          </p>
+          <div class="code-block">
+            {
+              "Question text exactly as it appears": "Answer to provide",
+              "Another question": "Another answer"
+            }
+          </div>
+          <p class="step-description">
+            These answer keys will be used automatically when matching questions.
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Option 2: Using Gemini AI Assistant</h3>
+          <p class="step-description">
+            To use the AI-powered assistant (requires internet connection):
+            <br>1. Obtain a Gemini API key
+            <br>2. Enter your key when prompted during setup
+            <br>3. The assistant will automatically answer questions during your session
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Running the Program</h3>
+          <p class="step-description">
+            After installation:
+            <br>1. Run <strong>main.py</strong> or use the desktop shortcut
+            <br>2. The program will automatically detect SEB sessions
+            <br>3. Use the key combinations below to access features
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tutorial-section">
+      <h2 class="section-title">Key Combinations</h2>
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Ghost Mode</h3>
+          <p class="step-description">Press <strong>Ctrl+Alt+G</strong> to activate Ghost Mode. This silently disables SEB restrictions while maintaining the appearance of a locked-down session.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">AI Assistant</h3>
+          <p class="step-description">With Ghost Mode active, press <strong>Ctrl+Alt+A</strong> to open the AI assistance panel. You can type questions directly or use voice input for hands-free operation.</p>
         </div>
         
         <div class="step">
           <h3 class="step-title">Emergency Exit</h3>
-          <p class="step-description">If you need to quickly return to SEB-compliant mode, press <strong>Ctrl+Alt+X</strong>. This will immediately restore all SEB restrictions and clear any traces of SEBunbound activity.</p>
+          <p class="step-description">Press <strong>Ctrl+Alt+X</strong> to quickly return to SEB-compliant mode. This immediately restores all SEB restrictions and clears traces of SEBunbound activity.</p>
         </div>
       </div>
     </div>
@@ -230,13 +346,69 @@
       <h2 class="section-title">Troubleshooting</h2>
       <div class="section-content">
         <div class="step">
-          <h3 class="step-title">Installation Errors</h3>
-          <p class="step-description">If you encounter installation errors, try running the installer in compatibility mode for Windows 10/11 or contact our support team.</p>
+          <h3 class="step-title">Antivirus Flags</h3>
+          <p class="step-description">If your antivirus flags the download or installation, temporarily disable your antivirus software and add an exception for the SEBunbound folder.</p>
         </div>
         
         <div class="step">
-          <h3 class="step-title">Detection Concerns</h3>
-          <p class="step-description">SEBunbound is designed to be undetectable, but always ensure you're using the latest version to benefit from our most advanced stealth technologies.</p>
+          <h3 class="step-title">Installation Errors</h3>
+          <p class="step-description">
+            If you encounter installation errors:
+            <br>• Run the installer again with administrator privileges
+            <br>• Install Python manually from python.org
+            <br>• Run: <code>pip install -r requirements.txt</code> in the installation directory
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Program Doesn't Launch</h3>
+          <p class="step-description">
+            • Check if Python is added to PATH
+            <br>• Try running the program directly: <code>python main.py</code>
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Gemini API Key Error</h3>
+          <p class="step-description">
+            If you get an error with your Gemini API key:
+            <br>1. Navigate to your installation folder
+            <br>2. Locate and open <strong>seb_config.json</strong>
+            <br>3. Replace the existing API key with your correct key
+            <br>4. Save the file and restart the program
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">No Matches Found for Questions</h3>
+          <p class="step-description">
+            • Make sure questions in your JSON file match exactly
+            <br>• Check for extra spaces or punctuation differences
+          </p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Power Connection Issue</h3>
+          <p class="step-description">
+            Remember: This exploit will NOT work if your PC is being charged. Disconnect from power for the exploit to function properly.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tutorial-section">
+      <h2 class="section-title">Getting a License</h2>
+      <div class="section-content">
+        <div class="step">
+          <h3 class="step-title">Free Trial</h3>
+          <p class="step-description">After installation, you'll receive a free trial of 5 uses valid for 1 week.</p>
+        </div>
+        
+        <div class="step">
+          <h3 class="step-title">Purchasing a License</h3>
+          <p class="step-description">
+            When your trial expires, you'll need to purchase a license to continue using SEBunbound. Contact us at [CONTACT INFO] to obtain a license key.
+          </p>
         </div>
       </div>
     </div>
