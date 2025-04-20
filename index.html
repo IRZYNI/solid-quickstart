@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEBunbound | Home</title>
   <link rel="icon" href="clipboard.ico" type="image/x-icon">
-
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics Tag (replace UA-XXXXXXXX-X with your actual tracking ID) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGW1ZNL82G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,9 +13,6 @@
   gtag('js', new Date());
 
   gtag('config', 'G-KGW1ZNL82G');
-
-</script>
-  
   <style>
     :root {
       --background: #0a0e17;
@@ -326,6 +322,69 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
     }
     
+    /* Feedback form styles */
+    .feedback-form {
+      display: none;
+      margin-top: 30px;
+      background-color: var(--secondary);
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      transition: all 0.3s ease;
+    }
+    
+    .feedback-title {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+    
+    .feedback-textarea {
+      width: 100%;
+      background-color: #2d3748;
+      color: var(--text);
+      border: 1px solid #4a5568;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 15px;
+      resize: vertical;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .feedback-btn {
+      background-color: var(--accent);
+      color: var(--background);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .feedback-btn:hover {
+      background-color: #00cc7d;
+      box-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
+    }
+    
+    .rating-stars {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .star {
+      color: #4a5568;
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: color 0.2s ease;
+    }
+    
+    .star:hover, .star.active {
+      color: var(--accent);
+    }
+    
     @media screen and (max-width: 768px) {
       .terminal {
         width: 90%;
@@ -346,6 +405,10 @@
       
       .nav-links {
         gap: 15px;
+      }
+      
+      .feedback-form {
+        width: 90%;
       }
     }
   </style>
@@ -409,6 +472,20 @@
     <a href="/SEBunbound.zip" download="SEBunbound.zip" class="download-btn" id="download-btn">
       Download SEBunbound
     </a>
+    
+    <!-- Feedback form -->
+    <div class="feedback-form" id="feedback-form">
+      <h3 class="feedback-title">How can we improve SEBunbound?</h3>
+      <div class="rating-stars" id="rating-stars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <textarea id="user-feedback" class="feedback-textarea" rows="4" placeholder="Tell us what features you'd like to see or what we could improve..."></textarea>
+      <button id="submit-feedback" class="feedback-btn">Submit Feedback</button>
+    </div>
     
     <div class="features">
       <div class="feature-card">
@@ -483,11 +560,49 @@
       canvas.height = window.innerHeight;
     });
     
-    // Terminal animation
+    // Star rating system
+    let userRating = 0;
+    const stars = document.querySelectorAll('.star');
+    
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const value = parseInt(star.getAttribute('data-value'));
+        userRating = value;
+        
+        // Update active stars
+        stars.forEach(s => {
+          if (parseInt(s.getAttribute('data-value')) <= value) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+        
+        // Track rating in Google Analytics
+        if (typeof gtag === 'function') {
+          gtag('event', 'rating', {
+            'event_category': 'Feedback',
+            'event_label': 'Product Rating',
+            'value': value
+          });
+        }
+      });
+    });
+    
+    // Terminal animation and download tracking
     const typingText = document.getElementById('typing-text');
     const downloadBtn = document.getElementById('download-btn');
     
     downloadBtn.addEventListener('click', () => {
+      // Track the download with Google Analytics
+      if (typeof gtag === 'function') {
+        gtag('event', 'download', {
+          'event_category': 'Files',
+          'event_label': 'SEBunbound.zip',
+          'value': 1
+        });
+      }
+      
       const terminalBody = document.getElementById('terminal-body');
       
       // Remove typing effect
@@ -513,9 +628,41 @@
             newLine3.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-text typing">download in progress...</span>';
             terminalBody.appendChild(newLine3);
             terminalBody.scrollTop = terminalBody.scrollHeight;
+            
+            // Show feedback form after download starts
+            setTimeout(() => {
+              document.getElementById('feedback-form').style.display = 'block';
+            }, 2000);
           }, 700);
         }, 700);
       }, 700);
+    });
+    
+    // Handle feedback submission
+    document.getElementById('submit-feedback').addEventListener('click', () => {
+      const feedback = document.getElementById('user-feedback').value;
+      
+      if (feedback.trim() !== '' || userRating > 0) {
+        // Send feedback to Google Analytics as an event
+        if (typeof gtag === 'function') {
+          gtag('event', 'feedback_submitted', {
+            'event_category': 'Feedback',
+            'event_label': feedback.substring(0, 150), // Send first 150 chars as label
+            'value': userRating
+          });
+        }
+        
+        // Thank the user
+        document.getElementById('feedback-form').innerHTML = '<p style="color: var(--accent); text-align: center; font-size: 18px;">Thank you for your feedback!</p>';
+        
+        // Track successful feedback submission
+        if (typeof gtag === 'function') {
+          gtag('event', 'feedback_success', {
+            'event_category': 'User Interaction',
+            'event_label': 'Feedback Form Submitted'
+          });
+        }
+      }
     });
   </script>
 </body>
